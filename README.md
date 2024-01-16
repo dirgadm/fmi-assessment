@@ -26,15 +26,19 @@
 | go run main.go     | Running server in 9090 port. This configuration is provided from /.config.json | 
 <br>
 
-## Endpoint Testing 
+### List Store Procedure(SP)
+1. absensi: Insert to attendance table based on login user
+2. register_user: This SP will insert data user to database without photo
+2. register_user_with_photo: This SP will insert data user to database with photo(Insert into user table then to uploaded_file table). It will assure consistent storing data intop database.
+### Endpoint Testing 
     - available in `./doc/FMI.postman_collection.json` and ready to import to postman
     - base_url: http://localhost:9090/v1
 
-## Technical Documentation
+### Technical Documentation
 - There are file upload.md, attendance.md and user.md in folder .doc
 - There are consist of Technical specification for each endpoint in this API, and also can be used as API contract between Backend & FrontEnd
 
-## Fungsional Requirement
+### Fungsional Requirement
 1. [POST] Registration(email, password, name, phone)user object
 2. [POST] Login(email, password string)user object
 3. [POST] Upload Photo(userId int, file string) file string
