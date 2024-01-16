@@ -15,6 +15,10 @@ import (
 	_uploadHandler "github.com/dirgadm/fmi-assessment/service/upload/handler"
 	// _uploadRepo "github.com/dirgadm/fmi-assessment/service/upload/repository"
 	_uploadUseCase "github.com/dirgadm/fmi-assessment/service/upload/usecase"
+
+	_attendanceHandler "github.com/dirgadm/fmi-assessment/service/attendance/handler"
+	_attendanceRepo "github.com/dirgadm/fmi-assessment/service/attendance/repository"
+	_attendanceUseCase "github.com/dirgadm/fmi-assessment/service/attendance/usecase"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -95,27 +99,18 @@ func main() {
 	timeoutContext := time.Duration(viper.GetInt("context.timeout")) * time.Second
 
 	// setup repo
-	// productRepo := _productRepo.NewMysqlProductRepository(gormDB)
 	userRepo := _userRepo.NewMysqlUserRepository(gormDB)
-	// uploadRepo := _uploadRepo.NewlUploadRepository(gormDB)
-	// categoryRepo := _categoryRepo.NewMysqlCategoryRepository(gormDB)
-	// productImageRepo := _productImageRepo.NewMysqlProductImageRepository(gormDB)
-	// cartRepo := _cartRepo.NewMysqlCartRepository(gormDB)
+	attendaceRepo := _attendanceRepo.NewlAttendanceRepository(gormDB)
 
 	// setup usecase
-	// productUsecase := _productUseCase.NewProductUsecase(productRepo, categoryRepo, productImageRepo, timeoutContext)
 	userUsecase := _userUseCase.NewUserUsecase(userRepo, timeoutContext)
 	uploadUsecase := _uploadUseCase.NewUploadUsecase(timeoutContext)
-	// categoryUsecase := _categoryUseCase.NewCategoryUsecase(categoryRepo, timeoutContext)
-	// cartUsecase := _cartUseCase.NewCartUsecase(cartRepo, productRepo, categoryRepo, productImageRepo, timeoutContext)
+	attendaceUsecase := _attendanceUseCase.NewAttendanceUsecase(attendaceRepo, timeoutContext)
 
 	// setup handler
-	// _productHandler.NewProductHandler(e, productUsecase)
 	_userHandler.NewUserHandler(e, userUsecase)
 	_uploadHandler.NewUploadsHandler(e, uploadUsecase)
-	// _categoryHandler.NewCategoryHandler(e, categoryUsecase)
-	// _categoryHandler.NewCategoryHandler(e, categoryUsecase)
-	// _cartHandler.NewCartHandler(e, cartUsecase)
+	_attendanceHandler.NewAttendanceHandler(e, attendaceUsecase)
 
 	log.Fatal(e.Start(viper.GetString("server.address")))
 }

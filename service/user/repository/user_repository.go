@@ -25,9 +25,12 @@ func (m *mysqlUserRepository) GetByEmail(ctx context.Context, email string) (use
 	return
 }
 
-func (m *mysqlUserRepository) Create(ctx context.Context, user *domain.User) (err error) {
-	err = m.Conn.Create(user).Error
-	return
+func (m *mysqlUserRepository) CreateWithPhoto(ctx context.Context, user *domain.User, userPhoto string) (err error) {
+	return m.Conn.Exec("CALL register_user_with_photo(?, ?, ?, ?, ?)", user.Email, user.Password, user.Name, user.Phone, userPhoto).Error
+}
+
+func (m *mysqlUserRepository) CreateWithoutPhoto(ctx context.Context, user *domain.User) (err error) {
+	return m.Conn.Exec("CALL register_user(?, ?, ?, ?)", user.Email, user.Password, user.Name, user.Phone).Error
 }
 
 func (m *mysqlUserRepository) Update(ctx context.Context, user *domain.User) (err error) {

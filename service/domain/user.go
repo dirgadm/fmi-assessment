@@ -32,6 +32,7 @@ type UserUsecase interface {
 type UserRepository interface {
 	GetDetail(ctx context.Context, id int) (user User, err error)
 	GetByEmail(ctx context.Context, email string) (user User, err error)
-	Create(ctx context.Context, user *User) (err error)
+	CreateWithPhoto(ctx context.Context, user *User, photo string) (err error)
+	CreateWithoutPhoto(ctx context.Context, user *User) (err error)
 	Update(ctx context.Context, user *User) (err error)
 }

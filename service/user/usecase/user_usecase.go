@@ -112,10 +112,19 @@ func (u *userUsecase) Register(ctx context.Context, req dto.RegisterRequest) (re
 		Phone:     req.Phone,
 		UpdatedAt: time.Now(),
 	}
-	err = u.userRepo.Create(ctx, user)
-	if err != nil {
-		log.Error(err)
-		return
+
+	if req.Photo == "" {
+		err = u.userRepo.CreateWithoutPhoto(ctx, user)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	} else {
+		err = u.userRepo.CreateWithPhoto(ctx, user, req.Photo)
+		if err != nil {
+			log.Error(err)
+			return
+		}
 	}
 
 	jwtInit := jwt.NewJWT([]byte(viper.GetString(`jwt.key`)))

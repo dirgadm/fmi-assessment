@@ -2,7 +2,6 @@ package http
 
 import (
 	"github.com/dirgadm/fmi-assessment/pkg/ehttp"
-	"github.com/dirgadm/fmi-assessment/pkg/middleware"
 	"github.com/dirgadm/fmi-assessment/service/domain"
 	"github.com/dirgadm/fmi-assessment/service/domain/dto"
 	"github.com/labstack/echo"
@@ -20,8 +19,7 @@ func NewUploadsHandler(e *echo.Echo, ps domain.UploadUsecase) {
 		UUsecase: ps,
 	}
 	v1 := e.Group("v1")
-	mw := middleware.NewMiddleware()
-	v1.POST("/upload", handler.UploadFile, mw.Authorized())
+	v1.POST("/upload", handler.UploadFile)
 }
 
 func (h UploadsHandler) UploadFile(c echo.Context) (err error) {

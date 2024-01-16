@@ -12,6 +12,7 @@ type RegisterRequest struct {
 	Password string `json:"password" validate:"required,gte=8"`
 	Name     string `json:"name" validate:"required,gte=2"`
 	Phone    string `json:"phone" validate:"required,gte=12"`
+	Photo    string `json:"photo"`
 }
 
 type AuthResponse struct {
