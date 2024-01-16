@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	jwt "github.com/dirgadm/fmi-assessment/pkg"
 	"github.com/dirgadm/fmi-assessment/pkg/ehttp"
+	jwt "github.com/dirgadm/fmi-assessment/pkg/jwt"
 	"github.com/dirgadm/fmi-assessment/service/domain"
 	"github.com/dirgadm/fmi-assessment/service/domain/dto"
 	"github.com/labstack/gommon/log"

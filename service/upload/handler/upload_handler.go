@@ -1,8 +1,8 @@
 package http
 
 import (
-	"github.com/dirgadm/fmi-assessment/middleware"
 	"github.com/dirgadm/fmi-assessment/pkg/ehttp"
+	"github.com/dirgadm/fmi-assessment/pkg/middleware"
 	"github.com/dirgadm/fmi-assessment/service/domain"
 	"github.com/dirgadm/fmi-assessment/service/domain/dto"
 	"github.com/labstack/echo"

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	jwtx "github.com/dirgadm/fmi-assessment/pkg"
+	jwtx "github.com/dirgadm/fmi-assessment/pkg/jwt"
 
 	"github.com/dirgadm/fmi-assessment/pkg/constants"
 	"github.com/dirgadm/fmi-assessment/pkg/ehttp"
