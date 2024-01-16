@@ -70,14 +70,11 @@ CREATE PROCEDURE `register_user_with_photo`(
 BEGIN
     DECLARE last_user_id INT;
 
-    -- Insert into user table
     INSERT INTO `user` (`email`, `password`, `name`, `phone`)
     VALUES (p_email, p_password, p_name, p_phone);
 
-    -- Get the last inserted user id
     SELECT LAST_INSERT_ID() INTO last_user_id;
 
-    -- Insert into uploaded_files table
     INSERT INTO `uploaded_files` (`file_name`, `user_id`)
     VALUES (p_photo_filename, last_user_id);
 END //
